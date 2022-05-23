@@ -1,31 +1,75 @@
 package Menus;
 
 import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class MainMenu {
-	private final String FN = "BRATISLAVA";
-public void menu() throws InterruptedException {
-	System.out.println("Input help down below for instructions!");
-	String fn = "neshto";
 	
+public void menu() throws InterruptedException, IOException {
+	//System.out.println("Input help down below for instructions!");
+	
+	System.out.print("Welcome ");
+	System.out.println( System.getProperty("user.name") );
+	System.out.println("Input open <fileName> down below!");
 	Scanner input  = new Scanner(System.in);
+	System.out.print("> ");
+	String s = input.nextLine();
+	String arr[]=s.split("[ ]");
 	
-	while(true) {
-		System.out.print("> ");
-		String s = input.nextLine();
-		
-	switch(s) {
+	System.out.println("dd");
+	String fn = arr[1];
+	
+	
+	
+	File mn = new File(fn);
+	mn.createNewFile();
+	try(FileReader fileReader = new FileReader(fn)) {
+	    int ch = fileReader.read();
+	    
+	        
+	        fileReader.close();
+	    
+	} catch (FileNotFoundException e) {
+	    // Exception handling
+	} catch (IOException e) {
+	    // Exception handling
+	}
+	boolean ff = true;
+	while(ff) {
+	System.out.print("> ");
+	String ss  = input.nextLine();
+	String arr1[]=ss.split("[ ]");	
+	switch(arr1[0]) {
 	case "help":{
 		printMenu();
 		break;
 	}
 		
-	case "open " +FN :
-		System.out.println("dd");
+	
+		
+		
+	case "close" :
+		  //fileReader.close();
+		break;
+	case "exit":
+		System.out.println("Exiting the program...");
+		ff = false;
+		break;
 	}
+	
 	}
+	
+	
+	
+	
+
+	
+
 	
 	
 }
