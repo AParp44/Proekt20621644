@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -16,8 +18,8 @@ public class MainMenu {
 public void menu() throws InterruptedException, IOException {
 	
 	ArrayList<CFG> list = new ArrayList<CFG>();
-	list.add(new CFG("S=> aA ", 0));
-	list.add(new CFG("S=> bB ", 1));
+	list.add(new CFG("S=>aA,S=>cC,S=>bB", 0));
+	list.add(new CFG("S=>bB", 1));
 	System.out.print("Welcome ");
 	System.out.println( System.getProperty("user.name") );
 	
@@ -84,10 +86,12 @@ public void menu() throws InterruptedException, IOException {
 	case "addRule" :{
 		for(CFG cfg : list) {
 			int selectedId = Integer.parseInt(arr1[1]);
+			
 			if(cfg.getId() == selectedId) {
 				int index = list.indexOf(cfg);
 				String oldValue = cfg.getGrammar();
-				list.set(index, new CFG(oldValue.concat(arr1[2]),selectedId));
+					
+				list.set(index, new CFG(oldValue + "," + arr1[2] , selectedId));
 				System.out.println(list);
 			}
 		}
@@ -97,12 +101,60 @@ public void menu() throws InterruptedException, IOException {
 		
 	
 		
+	case "removeRule":{
+	//String	strArray = .split(" ");  
+		for(CFG cfg : list) {
+			int selectedId = Integer.parseInt(arr1[1]);
 		
+			if(cfg.getId() == selectedId) {
+				int index = list.indexOf(cfg);
+				String[] azz = cfg.getGrammar().split(",");
+				List<String> listAzz = new ArrayList<String>(Arrays.asList(azz));
+				listAzz.remove(azz[Integer.parseInt(arr1[2])]);
+				azz = listAzz.toArray(new String[listAzz.size()]);
+				//System.out.println(azz);
+				String newGrammar = Arrays.toString(azz)
+					    .replace("[", "")
+					    .replace("]", "")
+					    .trim();
+				list.set(index, new CFG(newGrammar, selectedId));
+				//System.out.println(newGrammar);
+				//System.out.print(list);
+			}
+		}
+		zz = true;
+		break;
+	}
+	case "print":{
+		for(CFG cfg : list) {
+			int selectedId = Integer.parseInt(arr1[1]);
+			if(cfg.getId() == selectedId) {
+				String[] azz = cfg.getGrammar().split(",");
+				for(int i=0;i<azz.length;i++) {
+				System.out.println(i+1 +"." + azz[i]);
+				}
+			}
+		}
+		zz= true;
+		break;
+	}
+	case "empty":
+		for(CFG cfg : list) {
+			int selectedId = Integer.parseInt(arr1[1]);
+			if(cfg.getId() == selectedId) {
+				if(cfg.getGrammar().isEmpty()) {
+					System.out.println("Grammar is empty!");
+				}
+				else {
+					System.out.println("Grammar has rules");
+				}
+			}
+		}
+		zz= true;
+		break;
 	case "close" :
 		gg = true;
 		break;
-//		break;
-		//todo
 	case "save":
 		//todo
 		break;
@@ -120,17 +172,6 @@ public void menu() throws InterruptedException, IOException {
 	}
 	
 	}
-	
-	
-	
-	
-	
-	
-
-	
-
-	
-	
 }
 public void printMenu() throws InterruptedException  {
 	String blank ="             ";

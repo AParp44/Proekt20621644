@@ -8,10 +8,10 @@ private int id = idCount;
 private String grammar;
 	
 
-	public CFG(String grammar,int id) {
+	public CFG(String string,int id) {
 		idCount++;
 		this.id = id;
-		this.grammar = grammar;
+		this.grammar = string;
    
 	}
 
