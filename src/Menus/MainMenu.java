@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -152,11 +153,40 @@ public void menu() throws InterruptedException, IOException {
 		}
 		zz= true;
 		break;
+	case "chomsky":
+		for(CFG cfg : list) {
+			int selectedId = Integer.parseInt(arr1[1]);
+			if(cfg.getId() == selectedId) {
+				if(cfg.getGrammar().contains("R")) {
+				System.out.println("Grammar is in CNF");
+			}
+			else {
+				System.out.println("Grammar is not in CNF");
+			}
+		}
+		}
+		zz=true;
+		break;
 	case "close" :
 		gg = true;
 		break;
 	case "save":
-		//todo
+		if(arr1.length == 3) {
+			for(CFG cfg : list) {
+				int selectedId = Integer.parseInt(arr1[1]);
+				if(cfg.getId() == selectedId) {
+				String	fn = arr1[2];
+					FileWriter fw=  new FileWriter(fn);
+					fw.write(cfg.getGrammar());
+					fw.close();
+					System.out.println("Grammar successfuly saved in"+ fn);
+				}
+			}
+		}
+		if(arr1.length == 1) {
+		
+		}
+		zz=true;
 		break;
 	case "saveas":
 		//todo
