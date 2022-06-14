@@ -8,8 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import CFG.CFG;
@@ -19,8 +23,8 @@ public class MainMenu {
 public void menu() throws InterruptedException, IOException {
 	
 	ArrayList<CFG> list = new ArrayList<CFG>();
-	list.add(new CFG("S=>aA,S=>cC,S=>bB", 0));
-	list.add(new CFG("S=>bB", 1));
+	list.add(new CFG("S=>aA", 0));
+	list.add(new CFG("S=>dD", 1));
 	System.out.print("Welcome ");
 	System.out.println( System.getProperty("user.name") );
 	
@@ -34,18 +38,11 @@ public void menu() throws InterruptedException, IOException {
 		System.out.println("Input open <fileName> down below!");
 		Scanner input  = new Scanner(System.in);
 		String s;
-		
 		System.out.print("> ");
-		
 		 s = input.nextLine();
-		
 		String arr[]=s.split("[ ]");
 		if(!arr[1].isEmpty()) {
-			
 		String fn = arr[1];
-		
-		
-		
 		File mn = new File(fn);
 		System.out.println("Successfully opened " + mn.getPath());
 		System.out.println("You can now use other commands! If you want to check them out input help below!");
@@ -112,6 +109,7 @@ public void menu() throws InterruptedException, IOException {
 				String[] azz = cfg.getGrammar().split(",");
 				List<String> listAzz = new ArrayList<String>(Arrays.asList(azz));
 				listAzz.remove(azz[Integer.parseInt(arr1[2])]);
+				
 				azz = listAzz.toArray(new String[listAzz.size()]);
 				//System.out.println(azz);
 				String newGrammar = Arrays.toString(azz)
@@ -165,6 +163,80 @@ public void menu() throws InterruptedException, IOException {
 			}
 		}
 		}
+		zz=true;
+		break;
+	case "union":
+			if(arr1.length == 3) {
+			int selectedId = Integer.parseInt(arr1[1]);
+			int selectedId2 = Integer.parseInt(arr1[2]);
+//			list.get(selectedId);
+//			list.get(selectedId2);
+			String azz = list.get(selectedId).toString() +list.get(selectedId2).toString(); 
+			int i;
+			for( i =0;i<list.size();i++) {}												
+			 list.add(new CFG(azz.replaceAll("CFG", "").replaceAll("id=","").replaceAll("[0-9]", "").replaceAll("0", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").trim().replaceFirst(" ",",").replace(" ", "").trim(),i));
+			
+		
+		}
+		zz = true;
+		break;
+	case "concat":
+		if(arr1.length == 3) {
+			int selectedId = Integer.parseInt(arr1[1]);
+			int selectedId2 = Integer.parseInt(arr1[2]);
+			String azz = list.get(selectedId).toString().replaceAll("CFG", "") +list.get(selectedId2).toString().replaceAll("CFG", ""); 
+			int i;
+			for( i =0;i<list.size();i++) {}												
+			 list.add(new CFG(azz.replaceAll("CFG", "").replaceAll("id=","").replaceAll("[0-9]", "").replaceAll("0", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").trim().replaceFirst(" ",",").replace(" ", "").trim(),i));
+		}
+		zz=true;
+		break;
+	case "chomskify":{
+		if(arr1.length == 2) {
+		int selectedId = Integer.parseInt(arr1[1]);
+		int i;
+//		String oldValue ;
+//		String mf = list.get(selectedId).getGrammar();
+//		for(CFG cfg : list) {
+//			if(cfg.getId() == selectedId) {
+		String azz = list.get(selectedId).toString().replaceAll("id=", "").replaceAll("[0-9]", "").replaceAll(" ", "");
+		
+				if(azz.contains("R")) {
+					System.out.println("Grammar is already in CNF");
+					
+				}
+				else {
+				
+//				char[] ch = cfg.getGrammar().toCharArray();
+//				
+					for( i=0;i<list.size();i++) {}
+//						
+//					
+//					if(Character.isLowerCase(ch[i]) && ch[i]!='=') {
+//						oldValue = cfg.getGrammar().replace(ch[i], 'R');
+//						list.set(index, new CFG(oldValue.toString(),selectedId));
+//						System.out.println("dd");
+//					}
+//					else {
+//						System.out.println("not lower");
+//					}
+//						//String mf = list.get(selectedId).getGrammar();
+//					}	
+				list.add(new CFG(azz.replaceAll("[a-z]", "R").replaceAll("CFG", ""),i));
+				}
+					
+						
+					
+				
+					
+				
+					
+				}
+			
+		
+		
+		}
+		
 		zz=true;
 		break;
 	case "close" :
