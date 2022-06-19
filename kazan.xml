@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Grammars>
+    <ID>0</ID>
+    <Grammar>S=&gt;aA</Grammar>
+    <ID>1</ID>
+    <Grammar>S=&gt;dD</Grammar>
+</Grammars>
