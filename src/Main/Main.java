@@ -13,15 +13,11 @@ import CFG.CFG;
 import Files.XmlRead;
 import Menus.MainMenu;
 
+
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException, IOException, ParserConfigurationException, SAXException, XMLStreamException  {
 		MainMenu menu = new MainMenu();
 		menu.menu();
-	
-		
-
-		
 	}
-
 }

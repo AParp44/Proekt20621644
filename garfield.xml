@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Grammars>
+    <Grammar>
+        <ID>5</ID>
+        <Rules>S=&gt;mM,S=&gt;mMmM,S=&gt;mMmMmM</Rules>
+    </Grammar>
+</Grammars>

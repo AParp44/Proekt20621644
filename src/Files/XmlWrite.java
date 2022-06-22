@@ -30,7 +30,6 @@ public class XmlWrite {
 	        
 	        Element root = doc.createElement("Grammars");
 	        doc.appendChild(root);
-//
 	      
 
 
@@ -52,11 +51,9 @@ public class XmlWrite {
 
 	        }
 
-	        // Save the document to the disk file
 	        TransformerFactory tranFactory = TransformerFactory.newInstance();
 	        Transformer aTransformer = tranFactory.newTransformer();
 
-	        // format the XML nicely
 	        aTransformer.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-1");
 
 	        aTransformer.setOutputProperty(
@@ -65,7 +62,6 @@ public class XmlWrite {
 
 	        DOMSource source = new DOMSource(doc);
 	        try {
-	            // location and name of XML file you can change as per need
 	            FileWriter fos = new FileWriter(fn);
 	            StreamResult result = new StreamResult(fos);
 	            aTransformer.transform(source, result);
@@ -84,7 +80,7 @@ public class XmlWrite {
 	}
 
 	public void writeXmlFile2(CFG grammar, String fn,ArrayList<CFG> list) {
-		// TODO Auto-generated method stub
+		
 		
 		 try {
 

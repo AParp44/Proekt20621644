@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Grammars>
+    <Grammar>
+        <ID>0</ID>
+        <Rules>S=&gt;aA</Rules>
+    </Grammar>
+    <Grammar>
+        <ID>1</ID>
+        <Rules>S=&gt;dD</Rules>
+    </Grammar>
+</Grammars>

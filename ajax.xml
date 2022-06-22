@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Grammars>
+    <Grammar>
+        <ID>0</ID>
+        <Rules>S=&gt;aA</Rules>
+    </Grammar>
+    <Grammar>
+        <ID>1</ID>
+        <Rules>S=&gt;dD</Rules>
+    </Grammar>
+    <Grammar>
+        <ID>2</ID>
+        <Rules>S=&gt;fF,S=&gt;mM,S=&gt;zZ</Rules>
+    </Grammar>
+    <Grammar>
+        <ID>3</ID>
+        <Rules>S=&gt;mM</Rules>
+    </Grammar>
+    <Grammar>
+        <ID>4</ID>
+        <Rules>S=&gt;aA,S=&gt;dD</Rules>
+    </Grammar>
+</Grammars>

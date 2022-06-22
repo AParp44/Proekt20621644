@@ -117,8 +117,12 @@ private String grammar;
 		
 				
 				String oldValue = cfg.getGrammar();
-					
+				if(oldValue.contains("S=>")) {
 				dd.set(index, new CFG(oldValue + "," + arr1[2] , selectedId));
+				}
+				else {
+					dd.set(index, new CFG(oldValue + arr1[2] , selectedId));
+				}
 				//System.out.println(list);
 			
 	 }
@@ -145,24 +149,8 @@ private String grammar;
 				else {
 				 azz1 = list.get(selectedId).toString() +list.get(selectedId2).toString(); 
 				}
-				
-//				Matcher match = pattern.matcher(azz1);
-//				while(match.find()) {
-//					azz1 = azz1.replace(match.group(), match.group(1));
-//				}
-					// Convert to String
-//					for(String word: azz) {
-//						if(word != "remove") {
-//							result = result + word + " ";
-//						}
-//						
-//					}
-				
-				 
 					
-					 r = new CFG(azz1.replaceAll("CFG", "").replaceAll("id=","").replaceAll("[0-9]", "").replaceAll("0", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").trim().replaceFirst(" ",",").replace(" ", "").trim(),list.size());
-		
-					 //	dd.add(new CFG(azz.replaceAll("CFG", "").replaceAll("id=","").replaceAll("[0-9]", "").replaceAll("0", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").trim().replaceFirst(" ",",").replace(" ", "").trim(),dd.size()));
+				 r = new CFG(azz1.replaceAll("CFG", "").replaceAll("id=","").replaceAll("[0-9]", "").replaceAll("0", "").replaceAll("2", "").replaceAll("3", "").replaceAll("4", "").trim().replaceFirst(" ",",").replace(" ", "").trim(),list.size());
 				return r;
 			
 		
@@ -196,8 +184,6 @@ private String grammar;
 		
 		 
 	 }
-	
-
 	 public  void cyk( String s,ArrayList<CFG>list,int selectedId) {
 		 
 		 String grammars = this.getGrammar();
@@ -218,37 +204,7 @@ private String grammar;
 		 
 		 }
 		 
-		
-//		for(int j =0; j<ff.length;j++) {
-//		 for(int i=0;i<j;i++) {
-//			// char word = s.charAt(i); 
-//		 if(grammar.contains(ff[i].toString()) ) {
-//			 System.out.println("word applies to the grammar");
-//			
-//		 }
-//		 else {
-//			 System.out.println("word does not apply to the grammar");
-//		 
-//		 }
-//		 }
-//		 else if( i > ff.length) {
-//			 if(grammar.contains(ff[i].toString()) ) {
-//				 System.out.println("word applies to the grammar");
-//				
-//			 }
-//			 else {
-//				 System.out.println("word does not apply to the grammar");
-//			 
-//			 }
-	// }
-		 
-		
-		 
-		 
 		 }
-		
-	    
-
 	 public void empty(int selectedId,CFG cfg) {
 		 if(cfg.getId() == selectedId) {
 				if(cfg.getGrammar().isEmpty()) {
@@ -258,6 +214,19 @@ private String grammar;
 					System.out.println("Grammar has rules");
 				}
 	 }
+	 }
+	 public  void chomskify(ArrayList<CFG>list,int selectedId,boolean zz) {
+			String azz = list.get(selectedId).toString().replaceAll("id=", "").replaceAll("[0-9]", "").replaceAll(" ", "");
+			boolean prob = true;
+			if(azz.contains("R")) {
+				System.out.println("Grammar is already in CNF");
+				zz=true;
+			}
+			else {	
+				
+			list.add(new CFG(azz.replaceAll("[a-z]", "R").replaceAll("CFG", ""),list.size()));
+			}
+			
 	 }
 	 public void chomsky(int selectedId,CFG cfg) {
 		 if(cfg.getId() == selectedId) {
@@ -276,6 +245,19 @@ private String grammar;
 				System.out.println(i+1 +"." + azz[i]);
 				}
 			}
+	 }
+	 public void removeRule(int index,ArrayList<CFG>list,CFG cfg,int parsing,int selectedId) {
+		 String[] azz = cfg.getGrammar().split(",");
+			List<String> listAzz = new ArrayList<String>(Arrays.asList(azz));
+			listAzz.remove(azz[parsing]);
+			
+			azz = listAzz.toArray(new String[listAzz.size()]);
+			//System.out.println(azz);
+			String newGrammar = Arrays.toString(azz)
+				    .replace("[", "")
+				    .replace("]", "")
+				    .trim();
+			list.set(index, new CFG(newGrammar, selectedId));
 	 }
 	
 }
